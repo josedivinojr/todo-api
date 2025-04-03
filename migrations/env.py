@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from app.models.users import table_registry
+from app.models import table_registry
 from app.settings import Settings
 
 Sett = Settings()

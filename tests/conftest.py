@@ -3,6 +3,7 @@ from datetime import datetime
 
 import factory
 import pytest
+from factory import fuzzy
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session
@@ -10,7 +11,9 @@ from sqlalchemy.pool import StaticPool
 
 from app.app import app
 from app.db.database import get_session
-from app.models.users import User, table_registry
+from app.models import table_registry
+from app.models.todos import ToDo, ToDoStatus
+from app.models.users import User
 from app.security import get_password_hash
 
 
@@ -21,6 +24,16 @@ class UserFactory(factory.Factory):
     username = factory.Sequence(lambda n: f'username_{n}')
     email = factory.LazyAttribute(lambda obj: f'{obj.username}@email.com')
     password = factory.LazyAttribute(lambda obj: f'{obj.username}_password')
+
+
+class ToDoFactory(factory.Factory):
+    class Meta:
+        model = ToDo
+
+    title = factory.Faker('text')
+    description = factory.Faker('text')
+    status = fuzzy.FuzzyChoice(ToDoStatus)
+    user_id = 1
 
 
 @pytest.fixture
