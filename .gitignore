@@ -177,7 +177,11 @@ pyrightconfig.json
 
 # Generated using ignr.py - github.com/Antrikshy/ignr.py
 
-# Alembic Stuff
+# Alembic stuff
 migrations/script.py.*
 
+# Database file
 database.db
+
+# Visual Studio Code
+.vscode

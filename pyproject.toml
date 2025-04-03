@@ -27,6 +27,7 @@ pytest = "^8.3.5"
 pytest-cov = "^6.0.0"
 taskipy = "^1.14.1"
 ruff = "^0.11.2"
+factory-boy = "^3.3.3"
 
 [tool.ruff]
 line-length = 79
@@ -52,3 +53,4 @@ run_dev = 'fastapi dev app/app.py'
 pre_test = 'task lint'
 test = 'pytest -s -x --cov=app -vv'
 coverage = 'coverage html'
+full_test = 'task test && coverage html'

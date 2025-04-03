@@ -30,17 +30,23 @@ def create_user(user: UserSchema, session: T_Session):
         )
     )
 
-    if db_user:
-        if db_user.username == user.username:
-            raise HTTPException(
-                status_code=HTTPStatus.BAD_REQUEST,
-                detail='Username already exists',
-            )
-        if db_user.email == user.email:
-            raise HTTPException(
-                status_code=HTTPStatus.BAD_REQUEST,
-                detail='Email already exists',
-            )
+    existing_username = session.scalar(
+        select(User).where(User.username == user.username)
+    )
+    if existing_username:
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST,
+            detail='Username already exists',
+        )
+
+    existing_email = session.scalar(
+        select(User).where(User.email == user.email)
+    )
+    if existing_email:
+        raise HTTPException(
+            status_code=HTTPStatus.BAD_REQUEST,
+            detail='Email already exists',
+        )
 
     db_user = User(
         username=user.username,
