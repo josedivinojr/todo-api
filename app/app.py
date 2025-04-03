@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 
+from app.endpoints import auth, users
+
 app = FastAPI()
 
-# app.include_router(users.router, prefix="/v1")
+app.include_router(users.router, prefix='/v1')
+app.include_router(auth.router, prefix='/v1')
 
 
 @app.get('/')
