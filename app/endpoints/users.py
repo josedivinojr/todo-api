@@ -7,7 +7,8 @@ from sqlalchemy.orm import Session
 
 from app.db.database import get_session
 from app.models.users import User
-from app.schemas.users import UserList, UserMessage, UserPublic, UserSchema
+from app.schemas.message import Message
+from app.schemas.users import UserList, UserPublic, UserSchema
 from app.security import get_current_user, get_password_hash
 
 router = APIRouter(prefix='/users', tags=['users'])
@@ -95,7 +96,7 @@ def update_user(
     return current_user
 
 
-@router.delete('/{user_id}', response_model=UserMessage)
+@router.delete('/{user_id}', response_model=Message)
 def delete_user(
     user_id: int,
     session: T_Session,
