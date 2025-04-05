@@ -130,8 +130,6 @@ def test_list_todos_filter_combined_should_return_5_todos(
         headers={'Authorization': f'Bearer {token}'},
     )
 
-    print(response.json())
-
     assert len(response.json()['todos']) == expected_todos
 
 
