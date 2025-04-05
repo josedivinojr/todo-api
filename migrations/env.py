@@ -1,12 +1,13 @@
 from logging.config import fileConfig
-
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
+from sqlalchemy import engine_from_config, pool
 from alembic import context
 
-from app.models import table_registry
+from dotenv import load_dotenv
+load_dotenv('.env')
+
 from app.settings import Settings
+from app.models import table_registry
+from app.models import users, todos
 
 Sett = Settings()
 

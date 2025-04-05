@@ -52,7 +52,7 @@ def list_todos(  # noqa
         query = query.filter(ToDo.description.contains(description))
 
     if status:
-        query = query.filter(ToDo.status.contains(status))
+        query = query.filter(ToDo.status == status)
 
     todos = session.scalars(query.offset(offset).limit(limit)).all()
 
